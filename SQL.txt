@@ -1,0 +1,73 @@
+SET new.emp_anciennete = DATEDIFF( CURRENT_DATE, new.emp_embauche)/365.25
+
+
+
+BEGIN
+DECLARE numDep INT;
+DECLARE salMin INT;
+DECLARE salMax INT; 
+
+SELECT employe.num_dep INTO numDep 
+FROM employe 
+WHERE employe.emp_no = new.emp_sup;
+
+IF(numDep <> new.num_dep) AND ((new.code_grade NOT LIKE "DIREC") AND (new.code_grade NOT LIKE "PRESI")) THEN
+SET new.num_dep = numDep;
+END IF;
+
+SET new.emp_anciennete = DATEDIFF( CURRENT_DATE, new.emp_embauche)/365.25;
+
+SELECT grade_sal_max, grade_sal_min INTO salMax, salMin
+FROM grade
+WHERE new.code_grade = grade_code;
+
+IF(new.emp_salaire > salMax)THEN
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'salaire trop eleve';
+END IF;
+
+IF(new.emp_salaire < salMin)THEN
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'salaire trop bas';
+END IF;
+
+END
+
+
+
+
+INSERT INTO archive_employe VALUES (old.emp_no, old.emp_nom, old.emp_prenom, old.emp_embauche, old.emp_anciennete, old.code_grade, old.num_dep, old.emp_salaire, CURRENT_DATE)
+
+
+BEGIN
+SELECT cdCode, CdTitre, nation
+FROM chanteur, cd
+WHERE chanteur.pseudo = cd.Pseudo
+AND CdSortie BETWEEN oldAn AND newAn
+ORDER BY nation;
+END
+
+
+BEGIN
+SELECT chanteur.pseudo, COUNT(*)
+FROM chanteur, chanson
+WHERE chanteur.pseudo = chanson.Pseudo
+GROUP BY chanteur.pseudo
+ORDER BY chanteur.pseudo;
+END
+
+CREATE PROCEDURE chansonLong()
+BEGIN
+SELECT duree, chanson.pseudo, cdTitre
+FROM chanson, cd, ranger
+WHERE chanson.code = ranger.cd_code
+AND cd.CdCode = ranger.cd_code
+AND duree IN (SELECT MAX(duree) FROM chanson);
+END
+
+
+BEGIN
+DECLARE EXIT HANDLER FOR SQLSTATE '23000'
+SELECT 'Une erreur est survenue';
+
+INSERT INTO chanteur VALUES (Pseudo, Nation, Groupe);
+
+END
