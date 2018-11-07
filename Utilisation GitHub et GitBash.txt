@@ -1,0 +1,63 @@
+Se connecter et mettre a jour les fichier d'un projet sur GitHub par rapport a un dossier sur l'ordinateur
+$ git init	//Initialise le git
+
+$ git add .	//Ajoute un repertoire
+
+$ git commit -m "V 1"	//donne un numero de version
+
+$ git remote add origin https://github.com/SteevenT/ExempleGit	//Mettre le lien du GitHub + demande de connexion
+
+$ git push origin master	//Poussez la demande
+
+$ ls		// Information du git
+
+$ git push origin master -f	//-f pour forcer si une error
+
+$ git checkout -b develop	//Créer une branche nommé develop et vas dessus
+
+$ git branch develop		//Créer une branche nommé develop
+
+$ git checkout develop		//Passe sur la branche develop
+
+$ git checkout master		//retourne sur la branche principale
+
+$ git merge develop -Steeven	//Ajout des modification de steeven dans la branche master
+
+$ git merge develop -Laura	//Ajout des modification de Laura dans la branche master
+
+recuperer un git deja créer
+
+$ git init	//Initialise le git
+
+$ git remote add origin https://github.com/SteevenT/ExempleGit
+
+$ git pull origin master
+
+
+Ajout de code
+
+$ git add .	//Ajoute un repertoire
+
+$ git commit -m "V 1"	//donne un numero de version
+
+$ git remote add origin https://github.com/SteevenT/ExempleGit
+
+$ git push origin master
+
+
+Git son for windows ? logiciel poiur utiliser git sous windows 	
+github/ bitbucket /github / sourceforge : kebergeurs git
+
+1 se positionner dans le dossier du projet 
+
+2 git dash here (via clic droit)
+
+3 git imit // initialise le repertoire
+
+4 git add.   //ajoute contenu dossier courant 
+
+5 git commit- n « nom du commit »
+
+6 git remote add origin «  lien https »
+
+7 git push origin master  // met en ligne le projet 
